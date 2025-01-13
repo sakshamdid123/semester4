@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Me & You - Semester 4 Timetable</title>
+    <style>
+        body {
+            font-family: "Comic Sans MS", cursive, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: url('https://imgur.com/phNeZwY.jpg') no-repeat center center fixed; /* Cute pinkish-blue background */
+            background-size: cover;
+            color: #333;
+        }
+
+.tabular-container {
+    overflow-x: auto; /* Enable horizontal scrolling */
+    margin-bottom: 20px; /* Add space below table */
+}
+S
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            background: rgba(255, 255, 255, 0.9); /* Slight transparency */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            border-radius: 20px;
+            overflow: hidden;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+            font-size: 2.5em;
+            font-weight: bold;
+            letter-spacing: 2px;
+            background: linear-gradient(to right, #7ec8e3, #ffaddf);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        h1 span.me {
+            color: #7ec8e3;
+            font-style: italic;
+        }
+
+        h1 span.you {
+            color: #ffaddf;
+            font-style: italic;
+        }
+
+        select {
+            display: block;
+            margin: 0 auto 20px auto;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 10px;
+            border: 1px solid #ddd;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            background: #f9f9f9;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: center;
+            background: #fff;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 15px;
+            border: 1px solid #ddd;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        th {
+            background-color: #ffedf2;
+            color: #555;
+        }
+
+        td[data-type="lecture"] {
+            background-color: #d7f3fc;
+        }
+
+        td[data-type="tutorial"] {
+            background-color: #ffe0e7;
+        }
+
+        td[data-type="practical"] {
+            background-color: #fff8d2;
+        }
+
+        td:hover {
+            background-color: #f6f6f6;
+            cursor: pointer;
+            transform: scale(1.02);
+            transition: all 0.2s ease-in-out;
+        }
+
+        .legend {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .legend div {
+            display: flex;
+            align-items: center;
+        }
+
+        .legend span {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+        }
+
+        .lecture {
+            background-color: #d7f3fc;
+        }
+
+        .tutorial {
+            background-color: #ffe0e7;
+        }
+
+        .practical {
+            background-color: #fff8d2;
+        }
+
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+        min-height: auto;
+    }
+
+    .container {
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 1.8em; /* Adjust heading size */
+    }
+
+    table {
+        font-size: 0.9em; /* Adjust table font size */
+        display: block; /* Allow scrolling on smaller screens */
+        overflow-x: auto; /* Enable horizontal scrolling */
+        white-space: nowrap; /* Prevent text wrapping */
+    }
+
+    th, td {
+        padding: 10px; /* Reduce padding for smaller screens */
+    }
+
+    select {
+        font-size: 14px; /* Adjust font size of dropdown */
+    }
+
+    .legend {
+        flex-direction: column; /* Stack legend items vertically */
+        align-items: center;
+        font-size: 0.85em;
+    }
+
+    .legend div {
+        margin-bottom: 10px; /* Add space between legend items */
+    }
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1><span class="me">Me</span> & <span class="you">You</span> Semester 4 Timetable</h1>
+        <select id="personSelector" onchange="updateTimetable()">
+            <option value="default">Saksham</option>
+            <option value="sanaya">Sanaya</option>
+        </select>
+        <table id="timetable">
+            <thead>
+                <tr>
+                    <th>Day</th>
+                    <th>8:30-9:30</th>
+                    <th>9:30-10:30</th>
+                    <th>10:30-11:30</th>
+                    <th>11:30-12:30</th>
+                    <th>12:30-1:30</th>
+                    <th>2:00-3:00</th>
+                    <th>3:00-4:00</th>
+                    <th>4:00-5:00</th>
+                    <th>5:00-6:00</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Default timetable data -->
+                <tr>
+                    <td>Monday</td>
+                    <td data-type="lecture">COST-R15</td>
+                    <td data-type="lecture">LPP-R22</td>
+                    <td data-type="lecture">BSTAT-CLIB</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td data-type="practical">ABH-R36</td>                    
+                    <td data-type="practical">ABH-R36</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Tuesday</td>
+                    <td data-type="practical">BSTAT-SCR1</td>
+                    <td data-type="tutorial">LPP-T18</td>
+                    <td data-type="tutorial">COST-T8</td>
+                    <td data-type="lecture">IB-R27</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Wednesday</td>
+                    <td data-type="lecture">BSTAT-R18</td>
+                    <td data-type="lecture">LPP-R21</td>
+                    <td></td>
+                    <td data-type="lecture">IB-R21</td>
+                    <td data-type="lecture">HINDI-R28</td>
+                    <td data-type="lecture">ABH-R35</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Thursday</td>
+                    <td></td>
+                    <td data-type="practical">BSTAT-R4</td>
+                    <td></td>
+                    <td data-type="lecture">COST-R31</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Friday</td>
+                    <td data-type="lecture">BSTAT-R3</td>
+                    <td data-type="lecture">LPP-R21</td>
+                    <td data-type="tutorial">IB-T11</td>
+                    <td data-type="lecture">COST-R31</td>
+                    <td></td>
+                    <td data-type="practical">BIDV-R35</td>
+                    <td data-type="practical">BIDV-R35</td>
+                    <td data-type="practical">BIDV-R35</td>
+                    <td data-type="practical">BIDV-R35</td>
+                </tr>
+                <tr>
+                    <td>Saturday</td>
+                    <td></td>
+                    <td data-type="lecture">IB-R17</td>
+                    <td data-type="lecture">HINDI-R28</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="legend">
+            <div><span class="lecture"></span> Lecture</div>
+            <div><span class="tutorial"></span> Tutorial</div>
+            <div><span class="practical"></span> Practical</div>
+        </div>
+    </div>
+
+    <script>
+        const sanayaTimetable = `
+                <tr>
+                    <td>Monday</td>
+                    <td data-type="lecture">SM-R20</td>
+                    <td data-type="lecture">COST-R5</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td data-type="lecture">ABH-PB4</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Tuesday</td>
+                    <td data-type="lecture">SM-R4</td>
+                    <td data-type="tutorial">IB-T31</td>
+                    <td data-type="lecture">IB-SCR1</td>
+                    <td data-type="lecture">BSTAT-CLIB</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Wednesday</td>
+                    <td data-type="lecture">IB-R5</td>
+                    <td data-type="tutorial">SM-T37</td>
+                    <td data-type="tutorial">COST-T42</td>
+                    <td data-type="lecture">EVS-R27</td>
+                    <td data-type="lecture">SM-R4</td>
+                    <td></td>
+                    <td data-type="practical">ABH-PB4</td>
+                    <td data-type="practical">ABH-PB4</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Thursday</td>
+                    <td data-type="practical">EVS-SCR1</td>
+                    <td data-type="practical">BSTAT-SCR4</td>
+                    <td></td>
+                    <td data-type="lecture">IB-R35</td>
+                    <td data-type="lecture">COST-R27</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Friday</td>
+                    <td data-type="lecture">BSTAT-R30</td>
+                    <td></td>
+                    <td></td>
+                    <td data-type="lecture">COST-R5</td>
+                    <td></td>
+                    <td data-type="practical">BIT-PB4</td>
+                    <td data-type="practical">BIT-PB4</td>
+                    <td data-type="practical">BIT-PB4</td>
+                    <td data-type="practical">BIT-PB4</td>
+                </tr>
+                <tr>
+                    <td>Saturday</td>
+                    <td data-type="lecture">EVS-R22</td>
+                    <td></td>
+                    <td data-type="lecture">BSTAT-R34</td>
+                    <td data-type="practical">BSTAT-R34</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+        `;
+
+        function updateTimetable() {
+            const timetable = document.getElementById('timetable').querySelector('tbody');
+            const person = document.getElementById('personSelector').value;
+
+            if (person === 'sanaya') {
+                timetable.innerHTML = sanayaTimetable;
+            } else {
+                timetable.innerHTML = `
+                <tr>
+                    <td>Monday</td>
+                    <td data-type="lecture">COST-R15</td>
+                    <td data-type="lecture">LPP-R22</td>
+                    <td data-type="lecture">BSTAT-CLIB</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td data-type="practical">ABH-R36</td>                    
+                    <td data-type="practical">ABH-R36</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Tuesday</td>
+                    <td data-type="practical">BSTAT-SCR1</td>
+                    <td data-type="tutorial">LPP-T18</td>
+                    <td data-type="tutorial">COST-T8</td>
+                    <td data-type="lecture">IB-R27</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Wednesday</td>
+                    <td data-type="lecture">BSTAT-R18</td>
+                    <td data-type="lecture">LPP-R21</td>
+                    <td></td>
+                    <td data-type="lecture">IB-R21</td>
+                    <td data-type="lecture">HINDI-R28</td>
+                    <td data-type="lecture">ABH-R35</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Thursday</td>
+                    <td></td>
+                    <td data-type="practical">BSTAT-R4</td>
+                    <td></td>
+                    <td data-type="lecture">COST-R31</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Friday</td>
+                    <td data-type="lecture">BSTAT-R3</td>
+                    <td data-type="lecture">LPP-R21</td>
+                    <td data-type="tutorial">IB-T11</td>
+                    <td data-type="lecture">COST-R31</td>
+                    <td></td>
+                    <td data-type="practical">BIDV-R35</td>
+                    <td data-type="practical">BIDV-R35</td>
+                    <td data-type="practical">BIDV-R35</td>
+                    <td data-type="practical">BIDV-R35</td>
+                </tr>
+                <tr>
+                    <td>Saturday</td>
+                    <td></td>
+                    <td data-type="lecture">IB-R17</td>
+                    <td data-type="lecture">HINDI-R28</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                `;
+            }
+        }
+    </script>
+</body>
+</html>
